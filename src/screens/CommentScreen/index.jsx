@@ -99,7 +99,7 @@ const CommentScreen = ({route, navigation}) => {
                 <Pressable
                   onPress={() => {
                     if (comment.commentBy.id != user.id) {
-                      navigation.navigate('MainStack', {
+                      navigation.replace('MainStack', {
                         screen: 'UserProfileScreen',
                         params: {
                           user: comment.commentBy,

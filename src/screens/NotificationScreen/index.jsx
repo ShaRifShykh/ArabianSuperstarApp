@@ -55,7 +55,7 @@ const NotificationScreen = ({navigation}) => {
                 <Pressable
                   onPress={() => {
                     if (notification.item.comment.commentBy.id != user.id) {
-                      navigation.navigate('MainStack', {
+                      navigation.replace('MainStack', {
                         screen: 'UserProfileScreen',
                         params: {
                           user: notification.item.comment.commentBy,
@@ -101,7 +101,7 @@ const NotificationScreen = ({navigation}) => {
                 <Pressable
                   onPress={() => {
                     if (notification.item.like.likeBy.id != user.id) {
-                      navigation.navigate('MainStack', {
+                      navigation.replace('MainStack', {
                         screen: 'UserProfileScreen',
                         params: {
                           user: notification.item.like.likeBy,
@@ -147,7 +147,7 @@ const NotificationScreen = ({navigation}) => {
                 <Pressable
                   onPress={() => {
                     if (notification.item.rating.ratingBy.id != user.id) {
-                      navigation.navigate('MainStack', {
+                      navigation.replace('MainStack', {
                         screen: 'UserProfileScreen',
                         params: {
                           user: notification.item.rating.ratingBy,
