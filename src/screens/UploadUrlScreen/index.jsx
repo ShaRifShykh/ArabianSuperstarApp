@@ -59,7 +59,9 @@ const UploadUrlScreen = ({navigation}) => {
         <MainButton
           text={'Add a new Url'}
           onPress={() => {
-            navigation.navigate('AddUrlScreen');
+            navigation.navigate('HomeStack', {
+              screen: 'AddUrlScreen',
+            });
           }}
         />
 

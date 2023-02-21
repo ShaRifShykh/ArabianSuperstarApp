@@ -16,6 +16,8 @@ import PhoneInput from 'react-native-phone-number-input';
 import {ArabianSuperStarContext} from '../../../../context/ArabianSuperStarContext';
 import Loader from '../../../../components/Loader';
 import {Dialog, Portal} from 'react-native-paper';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import {moderateScale, verticalScale} from '../../../../constant/Metrics';
 
 const SignUpFormScreen = ({navigation}) => {
   const {signUp, authLoading} = useContext(ArabianSuperStarContext);
@@ -38,6 +40,8 @@ const SignUpFormScreen = ({navigation}) => {
   });
   const [showError, setShowError] = useState(false);
   const [valid, setValid] = useState(false);
+  const [hidePassword, setHidePassword] = useState(true);
+  const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
 
   const hideDialog = () => setShowError(false);
 
@@ -235,23 +239,52 @@ const SignUpFormScreen = ({navigation}) => {
 
       <View style={styles.textFieldContainer}>
         <Text style={styles.text}>Password</Text>
-        <TextInput
-          secureTextEntry
-          keyboardType="default"
-          style={styles.input}
-          value={password}
-          onChangeText={setPassword}
-        />
+
+        <View
+          style={[styles.input, {flexDirection: 'row', alignItems: 'center'}]}>
+          <TextInput
+            secureTextEntry={hidePassword}
+            keyboardType="default"
+            style={{flex: 1, color: COLORS.BLACK}}
+            value={password}
+            onChangeText={setPassword}
+          />
+
+          <TouchableOpacity
+            onPress={() => {
+              setHidePassword(!hidePassword);
+            }}>
+            <FontAwesome5
+              name={hidePassword ? 'eye-slash' : 'eye'}
+              size={moderateScale(18)}
+              color={'grey'}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
 
       <View style={styles.textFieldContainer}>
         <Text style={styles.text}>Re-type Password</Text>
-        <TextInput
-          secureTextEntry
-          style={styles.input}
-          value={confirmPassword}
-          onChangeText={setConfirmPassword}
-        />
+        <View
+          style={[styles.input, {flexDirection: 'row', alignItems: 'center'}]}>
+          <TextInput
+            secureTextEntry={hideConfirmPassword}
+            style={{flex: 1, color: COLORS.BLACK}}
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+          />
+
+          <TouchableOpacity
+            onPress={() => {
+              setHideConfirmPassword(!hideConfirmPassword);
+            }}>
+            <FontAwesome5
+              name={hideConfirmPassword ? 'eye-slash' : 'eye'}
+              size={moderateScale(18)}
+              color={'grey'}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
 
       <MainButton
@@ -261,7 +294,11 @@ const SignUpFormScreen = ({navigation}) => {
       />
 
       <View style={styles.footerLogoContainer}>
-        <Image source={require('../../../../../assets/logos/logo.png')} />
+        <Image
+          source={require('../../../../../assets/logos/logo.png')}
+          style={{width: '80%', height: 80}}
+          resizeMode="contain"
+        />
       </View>
     </ScrollView>
   );
@@ -294,7 +331,7 @@ const styles = StyleSheet.create({
     color: COLORS.BLACK,
   },
   footerLogoContainer: {
-    marginVertical: 30,
+    marginVertical: verticalScale(30),
     alignItems: 'center',
   },
 });

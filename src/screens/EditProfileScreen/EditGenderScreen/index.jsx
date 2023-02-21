@@ -144,7 +144,7 @@ const EditGenderScreen = ({navigation}) => {
             color={Colors.BLACK}
           />
         </Pressable>
-        <Text style={styles.appBarTitle}>Edit Gender</Text>
+        <Text style={styles.appBarTitle}>Edit Gender & Nominations</Text>
       </View>
 
       <View style={styles.mainContainer}>
@@ -245,7 +245,11 @@ const EditGenderScreen = ({navigation}) => {
       </View>
 
       <View style={styles.footerLogoContainer}>
-        <Image source={require('../../../../assets/logos/logo.png')} />
+        <Image
+          source={require('../../../../assets/logos/logo.png')}
+          style={{width: '80%', height: 80}}
+          resizeMode="contain"
+        />
       </View>
     </View>
   );

@@ -866,6 +866,7 @@ export const ArabianSuperStarProvider = ({children}) => {
 
       setUser(data.data.data);
       setCheckoutLoading(false);
+      getNotifications();
 
       return data;
     } catch (err) {

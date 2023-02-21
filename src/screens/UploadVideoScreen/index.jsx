@@ -57,12 +57,18 @@ const UploadVideoScreen = ({navigation}) => {
       </View>
 
       <View style={{paddingHorizontal: 20, paddingVertical: 30}}>
-        <MainButton
-          text={'Add a new Video'}
-          onPress={() => {
-            navigation.navigate('AddVideoScreen');
-          }}
-        />
+        {user.videos.length < 2 ? (
+          <MainButton
+            text={'Add a new Video'}
+            onPress={() => {
+              navigation.navigate('HomeStack', {
+                screen: 'AddVideoScreen',
+              });
+            }}
+          />
+        ) : (
+          <View></View>
+        )}
 
         <View style={{paddingVertical: 30}}>
           {user.videos
@@ -118,8 +124,11 @@ const UploadVideoScreen = ({navigation}) => {
                         containerStyle={{width: '48%'}}
                         text={'Edit'}
                         onPress={() => {
-                          navigation.navigate('UpdateVideoScreen', {
-                            videoParam: video,
+                          navigation.navigate('HomeStack', {
+                            screen: 'UpdateVideoScreen',
+                            params: {
+                              videoParam: video,
+                            },
                           });
                         }}
                       />

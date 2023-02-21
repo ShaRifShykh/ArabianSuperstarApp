@@ -68,7 +68,11 @@ const ProfileScreen = ({navigation}) => {
           style={{backgroundColor: COLORS.WHITE}}
           visible={modalVisible}
           onDismiss={() => setModalVisible(!modalVisible)}>
-          <Dialog.Actions>
+          <Dialog.Actions
+            style={{
+              paddingTop: 0,
+              paddingBottom: 0,
+            }}>
             <Button onPress={() => setModalVisible(!modalVisible)}>
               <AntDesign
                 name="close"
@@ -77,7 +81,11 @@ const ProfileScreen = ({navigation}) => {
               />
             </Button>
           </Dialog.Actions>
-          <Dialog.Content>
+          <Dialog.Content
+            style={{
+              paddingTop: 0,
+              paddingBottom: 0,
+            }}>
             <Pressable
               onPress={() => {
                 setModalVisible(false);
@@ -268,23 +276,27 @@ const ProfileScreen = ({navigation}) => {
             </Text>
           </View>
 
-          <View>
-            <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
-              <Image
-                style={[styles.actionIcon, {width: 14, height: 18}]}
-                resizeMode="cover"
-                source={require('../../../assets/icons/location.png')}
-              />
-              <Text
-                style={[
-                  styles.userInfoText,
-                  {paddingLeft: horizontalScale(4)},
-                ]}>
-                {user ? user.country : null}
-              </Text>
-            </View>
-            <Text style={styles.userInfoText}>{user ? user.zodiac : null}</Text>
+          <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
+            <Image
+              style={[styles.actionIcon, {width: 14, height: 18}]}
+              resizeMode="cover"
+              source={require('../../../assets/icons/location.png')}
+            />
+            <Text
+              style={[styles.userInfoText, {paddingLeft: horizontalScale(4)}]}>
+              {user ? user.country : null}
+            </Text>
           </View>
+        </View>
+
+        <View
+          style={[
+            styles.subContainer,
+            {paddingHorizontal: horizontalScale(30)},
+          ]}>
+          <Text style={styles.heading}>Zodiac</Text>
+
+          <Text style={styles.bioContent}>{user ? user.zodiac : null}</Text>
         </View>
 
         <View
@@ -341,7 +353,6 @@ const ProfileScreen = ({navigation}) => {
             style={{
               flexDirection: 'row',
               flexWrap: 'wrap',
-              justifyContent: 'space-between',
             }}>
             {user
               ? user.galleries
@@ -349,7 +360,12 @@ const ProfileScreen = ({navigation}) => {
                     return (
                       <Lightbox
                         key={image.id}
-                        style={{width: '33%', height: 130, marginBottom: 2}}
+                        style={{
+                          width: '33%',
+                          height: 130,
+                          marginBottom: 1,
+                          marginRight: 1,
+                        }}
                         renderContent={() => {
                           return (
                             <View
@@ -427,10 +443,12 @@ const ProfileScreen = ({navigation}) => {
                           height: '100%',
                         }}
                         paused={true}
+                        thumbnail={{
+                          uri: 'https://www.shutterstock.com/shutterstock/videos/1022031049/thumb/1.jpg?ip=x480',
+                        }}
                         disableBack={true}
                         navigator={navigation}
                         resizeMode="contain"
-                        toggleResizeModeOnFullscreen={false}
                         onEnterFullscreen={() => {
                           if (video != null) {
                             navigation.navigate('VideoScreen', {
@@ -465,6 +483,7 @@ const ProfileScreen = ({navigation}) => {
                           marginBottom: 10,
                           marginTop: 10,
                           opacity: 0.99,
+                          alignSelf: 'center',
                         }}
                         allowsFullscreenVideo
                         allowsInlineMediaPlayback
@@ -479,7 +498,11 @@ const ProfileScreen = ({navigation}) => {
         </View>
 
         <View style={styles.footerLogoContainer}>
-          <Image source={require('../../../assets/logos/logo.png')} />
+          <Image
+            source={require('../../../assets/logos/logo.png')}
+            style={{width: '80%', height: 80}}
+            resizeMode="contain"
+          />
         </View>
       </View>
     </ScrollView>

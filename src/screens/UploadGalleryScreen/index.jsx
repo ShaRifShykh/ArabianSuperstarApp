@@ -57,12 +57,18 @@ const UploadGalleryScreen = ({navigation}) => {
       </View>
 
       <View style={{paddingHorizontal: 20, paddingVertical: 30}}>
-        <MainButton
-          text={'Add a new Gallery'}
-          onPress={() => {
-            navigation.navigate('AddGalleryScreen');
-          }}
-        />
+        {user.galleries.length < 21 ? (
+          <MainButton
+            text={'Add a new Gallery'}
+            onPress={() => {
+              navigation.navigate('HomeStack', {
+                screen: 'AddGalleryScreen',
+              });
+            }}
+          />
+        ) : (
+          <View></View>
+        )}
 
         <View style={{paddingVertical: 30}}>
           {user.galleries
@@ -99,8 +105,11 @@ const UploadGalleryScreen = ({navigation}) => {
                         containerStyle={{width: '48%'}}
                         text={'Edit'}
                         onPress={() => {
-                          navigation.navigate('UpdateGalleryScreen', {
-                            gallery: image,
+                          navigation.navigate('HomeStack', {
+                            screen: 'UpdateGalleryScreen',
+                            params: {
+                              gallery: image,
+                            },
                           });
                         }}
                       />
@@ -108,7 +117,6 @@ const UploadGalleryScreen = ({navigation}) => {
                         containerStyle={{width: '48%'}}
                         text={'Delete'}
                         onPress={() => {
-                          // console.log(image.id);
                           deleteImage({id: image.id});
                         }}
                       />

@@ -11,7 +11,9 @@ import {
 import MainButton from '../../../components/MainButton';
 import COLORS from '../../../constant/Colors';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
+import {verticalScale} from '../../../constant/Metrics';
 
 const SignupScreen = ({navigation}) => {
   return (
@@ -44,7 +46,7 @@ const SignupScreen = ({navigation}) => {
             <AntDesign name={'google'} size={24} color={'red'} />
           </View>
           <View style={styles.socialContainer}>
-            <EvilIcons name={'sc-facebook'} size={38} color={'blue'} />
+            <FontAwesome name={'facebook-f'} size={26} color={'#3b5998'} />
           </View>
           <View style={styles.socialContainer}>
             <AntDesign name={'twitter'} size={24} color={'skyblue'} />
@@ -68,7 +70,11 @@ const SignupScreen = ({navigation}) => {
         </Text>
 
         <View style={styles.footerLogoContainer}>
-          <Image source={require('../../../../assets/logos/logo.png')} />
+          <Image
+            source={require('../../../../assets/logos/logo.png')}
+            style={{width: '80%', height: 80}}
+            resizeMode="contain"
+          />
         </View>
       </View>
     </ScrollView>
@@ -119,7 +125,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   footerLogoContainer: {
-    marginVertical: 30,
+    marginTop: verticalScale(30),
     alignItems: 'center',
   },
 });

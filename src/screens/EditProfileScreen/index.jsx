@@ -260,7 +260,7 @@ const EditProfileScreen = ({navigation}) => {
         </View>
 
         <View style={styles.textFieldContainer}>
-          <Text style={styles.text}>Country</Text>
+          <Text style={styles.text}>Country of Residence</Text>
 
           <Dropdown
             style={styles.dropdown}
@@ -359,7 +359,7 @@ const EditProfileScreen = ({navigation}) => {
         <MainButton
           style={{paddingVertical: 20}}
           containerStyle={{marginTop: 10}}
-          text={'Edit Gender'}
+          text={'Edit Gender & Nominations'}
           onPress={() => {
             navigation.navigate('MainStack', {
               screen: 'EditGenderScreen',
@@ -372,8 +372,8 @@ const EditProfileScreen = ({navigation}) => {
           containerStyle={{marginTop: 10}}
           text={'Add Galleries'}
           onPress={() => {
-            navigation.navigate('HomeStack', {
-              screen: 'UploadGalleryScreen',
+            navigation.navigate('MainStack', {
+              screen: 'ProfileUploadGalleryScreen',
             });
           }}
         />
@@ -383,8 +383,8 @@ const EditProfileScreen = ({navigation}) => {
           containerStyle={{marginTop: 10}}
           text={'Add Videos'}
           onPress={() => {
-            navigation.navigate('HomeStack', {
-              screen: 'UploadVideoScreen',
+            navigation.navigate('MainStack', {
+              screen: 'ProfileUploadVideoScreen',
             });
           }}
         />
@@ -394,8 +394,8 @@ const EditProfileScreen = ({navigation}) => {
           containerStyle={{marginTop: 10}}
           text={'Add Urls'}
           onPress={() => {
-            navigation.navigate('HomeStack', {
-              screen: 'UploadUrlScreen',
+            navigation.navigate('MainStack', {
+              screen: 'ProfileUploadUrlScreen',
             });
           }}
         />
@@ -409,7 +409,11 @@ const EditProfileScreen = ({navigation}) => {
       </View>
 
       <View style={styles.footerLogoContainer}>
-        <Image source={require('../../../assets/logos/logo.png')} />
+        <Image
+          source={require('../../../assets/logos/logo.png')}
+          style={{width: '80%', height: 80}}
+          resizeMode="contain"
+        />
       </View>
     </ScrollView>
   );

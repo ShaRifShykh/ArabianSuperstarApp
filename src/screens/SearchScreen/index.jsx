@@ -37,7 +37,14 @@ const SearchScreen = ({navigation}) => {
 
   const genders = [{value: 'Male'}, {value: 'Female'}];
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    searchUser({
+      query: '',
+      filter: null,
+      country: null,
+      gender: null,
+    });
+  }, []);
 
   return searchUsersLoading ? (
     <MainLoader />
@@ -111,18 +118,19 @@ const SearchScreen = ({navigation}) => {
               </View>
 
               <View style={{marginTop: 10}}>
-                <Text style={{color: Colors.BLACK}}>Country</Text>
+                <Text style={{color: Colors.BLACK}}>Nationality</Text>
                 <Dropdown
                   style={[styles.dropdown]}
-                  placeholderStyle={{color: Colors.INACTIVEGREY}}
-                  selectedTextStyle={{color: Colors.BLACK}}
-                  itemTextStyle={{color: Colors.INACTIVEGREY}}
+                  placeholderStyle={{color: Colors.INACTIVEGREY, fontSize: 14}}
+                  selectedTextStyle={{color: Colors.BLACK, fontSize: 14}}
+                  itemTextStyle={{color: Colors.INACTIVEGREY, fontSize: 14}}
                   data={countries}
                   maxHeight={300}
                   labelField="name"
                   valueField="name"
                   placeholder={'Select Country'}
                   value={country}
+                  search={true}
                   onChange={item => {
                     setCountry(item.name);
                   }}
@@ -133,9 +141,9 @@ const SearchScreen = ({navigation}) => {
                 <Text style={{color: Colors.BLACK}}>Gender</Text>
                 <Dropdown
                   style={[styles.dropdown]}
-                  placeholderStyle={{color: Colors.INACTIVEGREY}}
-                  selectedTextStyle={{color: Colors.BLACK}}
-                  itemTextStyle={{color: Colors.INACTIVEGREY}}
+                  placeholderStyle={{color: Colors.INACTIVEGREY, fontSize: 14}}
+                  selectedTextStyle={{color: Colors.BLACK, fontSize: 14}}
+                  itemTextStyle={{color: Colors.INACTIVEGREY, fontSize: 14}}
                   data={genders}
                   maxHeight={300}
                   labelField="value"
@@ -226,6 +234,13 @@ const SearchScreen = ({navigation}) => {
       <View style={styles.mainContainer}>
         <FlatList
           data={searchUsers}
+          ListEmptyComponent={() => {
+            return (
+              <View style={{alignItems: 'center'}}>
+                <Text>No User Found!</Text>
+              </View>
+            );
+          }}
           renderItem={user => (
             <Pressable
               onPress={() => {

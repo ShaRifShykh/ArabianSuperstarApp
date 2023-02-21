@@ -6,6 +6,7 @@ import {
   Pressable,
   Text,
   Image,
+  Dimensions,
 } from 'react-native';
 import Colors from '../../constant/Colors';
 import {ArabianSuperStarContext} from '../../context/ArabianSuperStarContext';
@@ -17,6 +18,7 @@ import {
 } from '../../constant/Metrics';
 import MainLoader from '../../components/MainLoader';
 import {List} from 'react-native-paper';
+import RenderHTML from 'react-native-render-html';
 
 const FAQScreen = ({navigation}) => {
   const {getFAQs, FAQS, FAQSLoading} = useContext(ArabianSuperStarContext);
@@ -76,7 +78,24 @@ const FAQScreen = ({navigation}) => {
                 color: Colors.BLACK,
               }}>
               <List.Item
-                title={faq.answer}
+                title={
+                  faq.answer.includes('</a>') ? (
+                    <RenderHTML
+                      source={{
+                        html: `${faq.answer}`,
+                      }}
+                      contentWidth={Dimensions.get('window').width}
+                      tagsStyles={{
+                        p: {color: Colors.INACTIVEGREY},
+                        div: {color: Colors.INACTIVEGREY},
+                      }}
+                    />
+                  ) : (
+                    <Text style={{color: Colors.INACTIVEGREY}}>
+                      {faq.answer}
+                    </Text>
+                  )
+                }
                 titleNumberOfLines={10}
                 titleStyle={{fontSize: 14, color: Colors.INACTIVEGREY}}
               />
@@ -86,7 +105,11 @@ const FAQScreen = ({navigation}) => {
       </View>
 
       <View style={styles.footerLogoContainer}>
-        <Image source={require('../../../assets/logos/logo.png')} />
+        <Image
+          source={require('../../../assets/logos/logo.png')}
+          style={{width: '80%', height: 80}}
+          resizeMode="contain"
+        />
       </View>
     </ScrollView>
   );

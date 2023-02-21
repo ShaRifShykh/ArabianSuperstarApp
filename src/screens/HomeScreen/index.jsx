@@ -32,7 +32,11 @@ const HomeScreen = ({navigation}) => {
   ) : (
     <View style={styles.container}>
       <View style={styles.imgContainer}>
-        <Image source={require('../../../assets/logos/logo.png')} />
+        <Image
+          source={require('../../../assets/logos/logo.png')}
+          style={{width: '50%', height: 50}}
+          resizeMode="contain"
+        />
       </View>
 
       <View style={styles.mainContainer}>
@@ -57,18 +61,6 @@ const HomeScreen = ({navigation}) => {
                     });
                   }}
                   style={{alignItems: 'center'}}>
-                  {/* <View
-                    style={{
-                      width: 70,
-                      height: 70,
-                      borderWidth: 2,
-                      borderRadius: 75,
-                      padding: 2,
-                      borderColor: COLORS.ORANGE,
-                    }}>
-
-                  </View> */}
-
                   <LinearGradient
                     start={{x: 0, y: 0}}
                     end={{x: 0, y: 1}}

@@ -14,6 +14,14 @@ import ContactScreen from '../screens/ContactScreen';
 import HowItWorkScreen from '../screens/HowItWorkScreen';
 import VideoScreen from '../screens/VideoScreen';
 import EditGenderScreen from '../screens/EditProfileScreen/EditGenderScreen';
+import UploadVideoScreen from '../screens/UploadVideoScreen';
+import AddVideoScreen from '../screens/UploadVideoScreen/AddVideoScreen';
+import UpdateVideoScreen from '../screens/UploadVideoScreen/UpdateVideoScreen';
+import UploadGalleryScreen from '../screens/UploadGalleryScreen';
+import AddGalleryScreen from '../screens/UploadGalleryScreen/AddGalleryScreen';
+import UpdateGalleryScreen from '../screens/UploadGalleryScreen/UpdateGalleryScreen';
+import UploadUrlScreen from '../screens/UploadUrlScreen';
+import AddUrlScreen from '../screens/UploadUrlScreen/AddUrlScreen.dart';
 
 const Main = createStackNavigator();
 
@@ -24,6 +32,17 @@ const MainStack = () => {
       <Main.Screen component={CommentScreen} name="CommentScreen" />
       <Main.Screen component={EditProfileScreen} name="EditProfileScreen" />
       <Main.Screen component={EditGenderScreen} name="EditGenderScreen" />
+
+      <Main.Screen
+        component={UploadVideoScreen}
+        name="ProfileUploadVideoScreen"
+      />
+      <Main.Screen
+        component={UploadGalleryScreen}
+        name="ProfileUploadGalleryScreen"
+      />
+      <Main.Screen component={UploadUrlScreen} name="ProfileUploadUrlScreen" />
+
       <Main.Screen component={HowItWorkScreen} name="HowItWorkScreen" />
       <Main.Screen component={ContactScreen} name="ContactScreen" />
       <Main.Screen component={FAQScreen} name="FAQScreen" />

@@ -19,6 +19,7 @@ import {BASE_IMG_URL} from '../../constant/BaseUrl';
 import {Button, Dialog, Portal} from 'react-native-paper';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Colors from '../../constant/Colors';
 import MainButton from '../../components/MainButton';
 import {
@@ -73,7 +74,7 @@ const UserProfileScreen = ({route, navigation}) => {
               onPress={() => setDefaultRating(item)}>
               <Image
                 style={styles.starImageStyle}
-                resizeMode="cover"
+                resizeMode="contain"
                 source={
                   item <= defaultRating
                     ? require('../../../assets/icons/filled-star.png')
@@ -296,10 +297,10 @@ const UserProfileScreen = ({route, navigation}) => {
                 </>
               ) : userRating <= 3 ? (
                 <>
-                  <FontAwesome
-                    name="star-half-empty"
+                  <FontAwesome5
+                    name="star-half-alt"
                     color={COLORS.MAIN1}
-                    size={moderateScale(35)}
+                    size={moderateScale(32)}
                     style={{marginTop: verticalScale(6)}}
                   />
                 </>
@@ -356,23 +357,27 @@ const UserProfileScreen = ({route, navigation}) => {
             <Text style={styles.userInfoText}>@{userProfile.username}</Text>
           </View>
 
-          <View>
-            <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
-              <Image
-                style={[styles.actionIcon, {width: 14, height: 18}]}
-                resizeMode="cover"
-                source={require('../../../assets/icons/location.png')}
-              />
-              <Text
-                style={[
-                  styles.userInfoText,
-                  {paddingLeft: horizontalScale(4)},
-                ]}>
-                {userProfile.country}
-              </Text>
-            </View>
-            <Text style={styles.userInfoText}>{userProfile.zodiac}</Text>
+          <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
+            <Image
+              style={[styles.actionIcon, {width: 14, height: 18}]}
+              resizeMode="cover"
+              source={require('../../../assets/icons/location.png')}
+            />
+            <Text
+              style={[styles.userInfoText, {paddingLeft: horizontalScale(4)}]}>
+              {userProfile.country}
+            </Text>
           </View>
+        </View>
+
+        <View
+          style={[
+            styles.subContainer,
+            {paddingHorizontal: horizontalScale(30)},
+          ]}>
+          <Text style={styles.heading}>Zodiac</Text>
+
+          <Text style={styles.bioContent}>{userProfile.zodiac}</Text>
         </View>
 
         <View
@@ -429,7 +434,6 @@ const UserProfileScreen = ({route, navigation}) => {
             style={{
               flexDirection: 'row',
               flexWrap: 'wrap',
-              justifyContent: 'space-between',
             }}>
             {userProfile
               ? userProfile.galleries
@@ -437,7 +441,12 @@ const UserProfileScreen = ({route, navigation}) => {
                     return (
                       <Lightbox
                         key={image.id}
-                        style={{width: '33%', height: 130, marginBottom: 2}}
+                        style={{
+                          width: '33%',
+                          height: 130,
+                          marginBottom: 1,
+                          marginRight: 1,
+                        }}
                         renderContent={() => {
                           return (
                             <View
@@ -514,10 +523,12 @@ const UserProfileScreen = ({route, navigation}) => {
                         height: '100%',
                       }}
                       paused={true}
+                      thumbnail={{
+                        uri: 'https://www.shutterstock.com/shutterstock/videos/1022031049/thumb/1.jpg?ip=x480',
+                      }}
                       disableBack={true}
                       navigator={navigation}
                       resizeMode="contain"
-                      toggleResizeModeOnFullscreen={false}
                       onEnterFullscreen={() => {
                         if (video != null) {
                           navigation.navigate('VideoScreen', {
@@ -551,6 +562,7 @@ const UserProfileScreen = ({route, navigation}) => {
                           marginBottom: 10,
                           marginTop: 10,
                           opacity: 0.99,
+                          alignSelf: 'center',
                         }}
                         allowsFullscreenVideo
                         allowsInlineMediaPlayback
@@ -565,7 +577,11 @@ const UserProfileScreen = ({route, navigation}) => {
         </View>
 
         <View style={styles.footerLogoContainer}>
-          <Image source={require('../../../assets/logos/logo.png')} />
+          <Image
+            source={require('../../../assets/logos/logo.png')}
+            style={{width: '80%', height: 80}}
+            resizeMode="contain"
+          />
         </View>
       </View>
     </ScrollView>

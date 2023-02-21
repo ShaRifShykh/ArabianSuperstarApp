@@ -181,7 +181,11 @@ const PersonalityDetailFormScreen = ({navigation}) => {
       />
 
       <View style={styles.footerLogoContainer}>
-        <Image source={require('../../../../../assets/logos/logo.png')} />
+        <Image
+          source={require('../../../../../assets/logos/logo.png')}
+          style={{width: '80%', height: 80}}
+          resizeMode="contain"
+        />
       </View>
     </View>
   );

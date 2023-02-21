@@ -7,13 +7,13 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
-  Alert,
   Keyboard,
 } from 'react-native';
 import MainButton from '../../../components/MainButton';
 import COLORS from '../../../constant/Colors';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Loader from '../../../components/Loader';
 import {ArabianSuperStarContext} from '../../../context/ArabianSuperStarContext';
 import {Dialog, Portal} from 'react-native-paper';
@@ -35,6 +35,7 @@ const LoginScreen = ({navigation}) => {
     error: null,
   });
   const [showError, setShowError] = useState(false);
+  const [hidePassword, setHidePassword] = useState(true);
 
   const hideDialog = () => setShowError(false);
 
@@ -117,14 +118,28 @@ const LoginScreen = ({navigation}) => {
             value={inputs.email}
             onChangeText={text => handleOnchange(text, 'email')}
           />
-          <TextInput
-            secureTextEntry
-            style={styles.input}
-            placeholder="Password"
-            placeholderTextColor={COLORS.INACTIVEGREY}
-            value={inputs.password}
-            onChangeText={text => handleOnchange(text, 'password')}
-          />
+
+          <View style={styles.inputPasswordContainer}>
+            <TextInput
+              secureTextEntry={hidePassword}
+              style={styles.inputWithoutBorder}
+              placeholder="Password"
+              placeholderTextColor={COLORS.INACTIVEGREY}
+              value={inputs.password}
+              onChangeText={text => handleOnchange(text, 'password')}
+            />
+
+            <TouchableOpacity
+              onPress={() => {
+                setHidePassword(!hidePassword);
+              }}>
+              <FontAwesome5
+                name={hidePassword ? 'eye-slash' : 'eye'}
+                size={moderateScale(18)}
+                color={'grey'}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
 
         <TouchableOpacity
@@ -146,10 +161,10 @@ const LoginScreen = ({navigation}) => {
             <AntDesign name={'google'} size={moderateScale(24)} color={'red'} />
           </View>
           <View style={styles.socialContainer}>
-            <EvilIcons
-              name={'sc-facebook'}
-              size={moderateScale(38)}
-              color={'blue'}
+            <FontAwesome
+              name={'facebook-f'}
+              size={moderateScale(26)}
+              color={'#3b5998'}
             />
           </View>
           <View style={styles.socialContainer}>
@@ -178,7 +193,11 @@ const LoginScreen = ({navigation}) => {
         </Text>
 
         <View style={styles.footerLogoContainer}>
-          <Image source={require('../../../../assets/logos/logo.png')} />
+          <Image
+            source={require('../../../../assets/logos/logo.png')}
+            style={{width: '80%', height: 80}}
+            resizeMode="contain"
+          />
         </View>
       </View>
     </ScrollView>
@@ -213,11 +232,24 @@ const styles = StyleSheet.create({
   inputContainer: {
     paddingVertical: verticalScale(20),
   },
+  inputPasswordContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderBottomColor: COLORS.GREY,
+    borderBottomWidth: 1,
+    marginVertical: verticalScale(10),
+  },
   input: {
+    color: COLORS.BLACK,
     borderBottomColor: COLORS.GREY,
     borderBottomWidth: 1,
     marginVertical: verticalScale(10),
     color: COLORS.BLACK,
+  },
+  inputWithoutBorder: {
+    color: COLORS.BLACK,
+    flex: 1,
   },
   linkText: {
     textAlign: 'right',
@@ -239,7 +271,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   footerLogoContainer: {
-    marginVertical: verticalScale(30),
+    marginTop: verticalScale(30),
     alignItems: 'center',
   },
 });

@@ -14,6 +14,7 @@ import MainButton from '../../../../components/MainButton';
 import {ArabianSuperStarContext} from '../../../../context/ArabianSuperStarContext';
 import Loader from '../../../../components/Loader';
 import {Dialog, Portal} from 'react-native-paper';
+import {verticalScale} from '../../../../constant/Metrics';
 
 const BioFormScreen = ({navigation}) => {
   const {authLoading, addBio} = useContext(ArabianSuperStarContext);
@@ -124,7 +125,11 @@ const BioFormScreen = ({navigation}) => {
       />
 
       <View style={styles.footerLogoContainer}>
-        <Image source={require('../../../../../assets/logos/logo.png')} />
+        <Image
+          source={require('../../../../../assets/logos/logo.png')}
+          style={{width: '80%', height: 80}}
+          resizeMode="contain"
+        />
       </View>
     </ScrollView>
   );
@@ -156,7 +161,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   footerLogoContainer: {
-    marginVertical: 30,
+    marginVertical: verticalScale(30),
     alignItems: 'center',
   },
 });

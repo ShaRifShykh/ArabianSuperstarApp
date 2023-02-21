@@ -20,6 +20,7 @@ import {
   moderateScale,
   verticalScale,
 } from '../../../constant/Metrics';
+import Toast, {SuccessToast} from 'react-native-toast-message';
 
 const CardInfoScreen = ({route, navigation}) => {
   const {plan, cardNumber, cardholderName, month, year} = route.params;
@@ -39,6 +40,7 @@ const CardInfoScreen = ({route, navigation}) => {
 
   const submit = async () => {
     Keyboard.dismiss();
+
     await buyVotes({
       planId: plan.id,
       cardNumber: cardNumber,
@@ -48,9 +50,15 @@ const CardInfoScreen = ({route, navigation}) => {
       cvv: cvv,
     }).then(val => {
       if (val.status === 200) {
-        navigation.replace('BottomStack', {
-          screen: 'VoteBucketScreen',
+        Toast.show({
+          type: 'success',
+          text1: 'Purchased Successfully! 👋',
         });
+        setTimeout(() => {
+          navigation.replace('BottomStack', {
+            screen: 'VoteBucketScreen',
+          });
+        }, 1000);
       } else if (val.response.status === 400) {
         setShowError(true);
         setErrors(val.response.data.errors);
@@ -67,7 +75,6 @@ const CardInfoScreen = ({route, navigation}) => {
       showsVerticalScrollIndicator={false}
       nestedScrollEnabled={true}>
       <Loader visible={checkoutLoading} />
-
       <Portal>
         <Dialog visible={showError} onDismiss={hideDialog}>
           <Dialog.Title style={{textAlign: 'center'}}>Error!</Dialog.Title>
@@ -157,8 +164,14 @@ const CardInfoScreen = ({route, navigation}) => {
       </View>
 
       <View style={styles.footerLogoContainer}>
-        <Image source={require('../../../../assets/logos/logo.png')} />
+        <Image
+          source={require('../../../../assets/logos/logo.png')}
+          style={{width: '80%', height: 80}}
+          resizeMode="contain"
+        />
       </View>
+
+      <Toast />
     </ScrollView>
   );
 };
